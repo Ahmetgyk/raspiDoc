@@ -1,0 +1,42 @@
+2- Aşağıdaki kodları terminal ekranına yazıp “enter” tuşuna basarak OpenCv için gerekli bağımlılıkları yüklüyoruz.
+$ sudo apt-get install libhdf5-dev -y && sudo apt-get install libhdf5-serial-dev -y && sudo apt-get install libatlas-base-dev -y && sudo apt-get install libjasper-dev -y && sudo apt-get install libqtgui4 -y && sudo apt-get install libqt4-test -y
+
+3- Gerekli Video ve Image kütüphanelerini yüklüyoruz.
+$ sudo apt-get install libjpeg-dev libpng-dev libtiff-dev && sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev && sudo apt-get install libxvidcore-dev libx264-dev
+
+4- PIP paket yöneticisini, Numpy be Matplotlib kütüphanelerini yüklüyoruz.
+$ sudo apt-get install python3-dev
+$ sudo apt-get install python-pip
+$ sudo apt install python3-matplotlib
+$ sudo apt-get install python3-numpy
+
+sudo rm -r numpy
+
+5- OpenCv’yi Kuruyoruz.
+$ pip3 install opencv-contrib-python==4.1.0.25
+
+6- Bu işlemden sonra Raspberry Pi işletim sisteminde yüklü gelen Thonny Ide üzerinde aşağıdaki kodu çalıştırarak OpenCV versiyonunuzu görebilirsiniz.
+import cv2
+print(cv2.__version__)
+
+Eğer OpenCv doğru bir şekilde yüklendiyse yukarıdaki kod çalıştıktan sonra bize 4.1.0 çıktısı verir  ve yükleme işlemimiz doğru şekilde yapılmış demektir. Bu işlemlerden sonra eğer Raspberry Pi Kamera modülümüz var ve onu kullanmak istiyor isek  aşağıdaki işlemleri yapabiliriz. Eğer Raspberry Pi Kamera modülümüz yoksa aşağıdaki işlemleri atlayabiliriz. Raspberry Pi bazı usb kameraları da tanıyabilmektedir, ayrıca cep telefonlarını da “Iriun” gibi programlarla veya “ip webcam” programlarıyla Raspberry Pi ile kullanabilirsiniz.
+
+Pi Camera’yı ve gerekli dosyaları kuruyoruz:
+
+$ sudo raspi-config
+ile ayarlara giriyoruz. Burada; “Interfacing Options” a geliyoruz. Buradan kamera arayüzünü aktif (enable) ediyoruz ve sistemi yeniden başlatıyoruz.
+
+sistem açılınca terminalden
+raspistill -v -o test.jpg
+komutu ile bir resim çektirerek test ediyoruz. Bu resim pi klasörü içerisinde olacaktır.
+
+Daha sonra
+$ sudo modprobe bcm2835-v4l2
+$ v4l2-ctl -set-ctrl video_bitrate=10000000
+
+Komutunu çalıştırarak V4l2 sürücüsünü aktif ediyoruz. Bu işlemlerden sonra Raspberry Pi cihazımız ve Raspberry Pi Kamera Modlümüz kullanıma hazır.
+
+Bir sonraki yazımızda Raspberry Pi ve OpenCv ile basit işlemler yapacağız.
+
+
+pip install numpy
